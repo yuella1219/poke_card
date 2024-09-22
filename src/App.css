@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dark-screen{background:#e6e8ec;min-height:100vh}
+*{margin:0;padding:0;list-style:none;text-decoration:none;}
+.card-list{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px 20px;width:1200px;margin:0 auto;padding:0 0px;box-sizing:border-box}
+.card{flex: 0 0 242px;height:318px;border-radius:8px;background:#f8f8f5;border:4px solid #8d8e91;box-shadow:3px 3px 12px rgba(0, 0, 0, 0.1);padding:12px;box-sizing:border-box}
+.card .species-info{display:flex;align-items:center;justify-content:space-between}
+.card .name{font-family:'GmarketSansMedium';font-size:18px;font-weight:700;}
+.card .number{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;width:32px;height:32px;border:1px solid #9b9b9b;box-sizing:border-box}
+.card .number p{font-family:'GmarketSansMedium';font-size:14px;font-weight:700;margin-top:1px;margin-left:1px}
+.card .img-swiper{width:96px;height:96px;margin:8px auto}
+.card .skill-info{font-size:14px;word-break:keep-all;padding:8px 4px;box-sizing:border-box;border-top:1px solid #ddd}
+
+/* skeleton */
+.skeleton.card{border:4px solid #eceff1}
+.skeleton div{border-radius:50px;background:#f1f3f5;position:relative;overflow:hidden}
+.skeleton div::before{content:"";display:block;width:100px;height:100%;position:absolute;top:0;background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 25%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 75%, rgba(255,255,255,0) 100%);animation-name:skeletonMask;animation-duration:2s;animation-iteration-count:infinite}
+@keyframes skeletonMask{
+  0%{
+    left:0;
+    transform:translateX(-100%);
+  }
+  100%{
+    left:100%;
+    /* transform:translateX(100%); */
+  }
+}
+.skeleton .species-info{background:none;border-radius:0;height:32px}
+.skeleton .name{width:80%;height:80%}
+.skeleton .number{border-style:none}
+.skeleton .skill-info{background:none;border-radius:0;border-style:none}
+.skeleton .img-swiper{border-radius:8px}
+.skeleton .skill-info div{height:16px;margin-bottom:8px}
+

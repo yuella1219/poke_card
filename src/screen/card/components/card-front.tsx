@@ -17,25 +17,30 @@ interface Props {
 }
 
 interface KoreanData {
-    name: string;
-    flavor_text: string;
-    type: string;
-    color : string;
+    name?: string;
+    flavor_text?: string;
+    type?: string;
+    color?: string;
+    koNm?: string;
   }
 
 export const CardFront = ({data}) => {
     const [pokeData, setPokeData] = useState<Props | null>(null);
     const [speciesData, setSpeciesData] = useState('');
-    const [koreanData, setKoreanData] = useState<KoreanData>()
+    const [koreanData, setKoreanData] = useState<KoreanData | null>()
+    // const [koreanData, setKoreanData] = useState<KoreanData>()
     const [isLoading, setIsLoading] = useState(true);
+    const [typeKO, setTypeKO] = useState('');
 
     const urlList = async () => {
         const url_key = data.url;
         await axios.get(url_key).then(response => {
             setPokeData(response.data);
+            setTypeKO(response.data.types)
             // console.log(pokeData?.species)
             setSpeciesData(response.data.species.url)
             setIsLoading(false)
+            console.log(typeKO)
         })
         .catch(error => console.error('error'))
     }
@@ -47,10 +52,26 @@ export const CardFront = ({data}) => {
             const types = response.data.egg_groups;
             const colors = response.data.color.name;
             if (names && flavor && types && colors) {
-                setKoreanData({ name: names.name, flavor_text: flavor.flavor_text, type: types.name, color: colors, })
+                setKoreanData({ name: names.name, flavor_text: flavor.flavor_text, type: types[0].name, color: colors, koNm:'' })
             }
+            // getKoreanTypes();
+            // console.log(response.data)
         })
         .catch(error => console.error('한국어 이름 에러'))
+    }
+
+    const getKoreanTypes = async () => {
+        await axios.get(typeKO).then(response => {
+            const types = response.data.types;
+            
+            const KoreanTypesExtract = types.map((idx)=>{
+                const koNm = idx.names.find((nm) => nm.language.name === 'ko');
+                return koNm ? koNm.name : idx.name;
+            })
+            // setKoreanData((prev) => [...prev, ...KoreanTypesExtract])
+            console.log(koreanData)
+
+        }).catch(error => console.log('error') )
     }
 
     useEffect(()=>{
@@ -58,8 +79,9 @@ export const CardFront = ({data}) => {
     }, [data])
 
     useEffect(()=>{
-        getKoreanData();
-        console.log(koreanData)
+        if(speciesData){
+            getKoreanData();
+        }
     }, [speciesData])
 
     return (
